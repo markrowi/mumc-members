@@ -1,0 +1,18 @@
+{
+    "editor.wordWrap": "on",
+    "window.zoomLevel": 0,
+    "window.title": "${activeEditorMedium}${separator}${activeEditorShort}",
+    "files.associations": {
+      "*.css": "postcss",
+      "*.js": "javascriptreact"
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "node_modules":true,
+        ".vscode":true
+      }
+  }
