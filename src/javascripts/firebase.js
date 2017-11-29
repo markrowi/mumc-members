@@ -1,8 +1,10 @@
-import * as firebase from 'firebase'
+import * as firebase from 'firebase';
+// import * as firebaseui from 'firebaseui';
+
 let database;
 let family
 
-export const init = ()=>{
+// export const init = ()=>{
       // Initialize Firebase
   var config = {
     apiKey: "AIzaSyDlCrMx1Z0vo2e8Cq4EhwJt7KmJGN7CZQk",
@@ -12,12 +14,45 @@ export const init = ()=>{
     storageBucket: "members-34f65.appspot.com",
     messagingSenderId: "297737399796"
   };
+
   firebase.initializeApp(config);
-  database = firebase.database();
-  database.ref('/').once('value',(res)=>{
-    console.log(res.val());
-  })
+
+  export const uiConfig = {
+    signInFlow: 'popup',
+    signInSuccessUrl: 'http://localhost:3000/',
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      firebase.auth.PhoneAuthProvider.PROVIDER_ID
+    ],
+    tosUrl: '/'
+  };
+//   var ui = new firebaseui.auth.AuthUI(firebase.auth());
   
+//   ui.start('#firebaseui-auth-container', uiConfig);
+
+//   firebase.auth().onAuthStateChanged(function(user) {
+//       if(user){
+//         database = firebase.database();
+//         database.ref('/').once('value',(res)=>{
+//           console.log(res.numChildren());
+//         })
+
+//         console.log('Logged In', user)
+//       }else{
+//           console.log('LoggedOut')
+//       }
+//   })
+
+export const firebaseAuth = firebase.auth;
+export const ref = firebase.database().ref();
+
+export const signOut = () =>{
+    return firebase.auth().signOut();
+}
+
+export const getCurrentUser = () => {
+    return firebase.auth().currentUser;
 }
 
 export const getSectionsDB = () => {

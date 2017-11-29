@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import {init as firebaseInit, setName} from './javascripts/firebase'
+import {setName, signOut, firebaseAuth, uiConfig} from './javascripts/firebase'
 import logo from './logo.svg';
 import './App.css';
+// import 'firebaseui/dist/firebaseui.css'
+
+import { FirebaseAuth } from 'react-firebaseui';
+
 
 var Input = (props)=>{
   if (props.inp){
@@ -13,19 +17,28 @@ var Input = (props)=>{
 class App extends Component {
   constructor(){
     super();
-    firebaseInit();
-
-
+  
     this.state = {
       counter:0,
-      input: false
+      input: false,
+      isLoggedIn:false
     };
-
+    var self = this
     this.handleSetName = this.handleSetName.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
+    // firebase.onAuthStateChanged(function(user){
+    //   self.setState({isLoggedIn:!!user})
+    //   console.log(user)
+    // })
   }
 
   componentDidMount(){
+    var self = this
     this.setState({input:true})
+    firebaseAuth().onAuthStateChanged(function(user){
+      console.log("Logged In",user);
+      self.setState({isLoggedIn:!!user})
+    })
   }
 
   rerender(){
@@ -40,35 +53,35 @@ class App extends Component {
     });
   }
 
-  render() {
-  
+  handleSignOut(){
+    signOut().then(function(){
+      console.log('success logged out.')
+    })
+  }
 
-    let {counter} = this.state;
+  render() {
+    console.log(firebaseAuth().currentUser)
+    let {counter, isLoggedIn} = this.state;
     return (
       <div className="App">
         <header className="App-header">
           <img src={process.env.PUBLIC_URL + logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">REACT</h1>
         </header>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          {(()=>{
+            if(!isLoggedIn){
+              return <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth()} style={{"display": (!isLoggedIn?"block":"none")}}/>
+            }else{
+              return <input onClick={this.handleSignOut} type="button" className="btn btn-primary" value="logout"/>
+            }})()
+          }
           
-         
-
+          
         </p>
-        <input type="button" className="btn" onClick={this.rerender.bind(this)} value="rerender"/>
-        <p>
-          {counter}
-        </p>
-        {(()=>{
-          if (this.state.input){
-            return (<h1>
-              <strong>Anonymous</strong><br/>
-              <input type="text" onChange={this.handleSetName} name="" id=""/>
-              </h1>)
-          } return ""
-        })()}
-        <Input inp={this.state.input} rrender={this.rerender.bind(this)}/>
+       
+        
+        
       </div>
     );
   }
