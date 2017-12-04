@@ -7,13 +7,13 @@ import './App.css';
 import { FirebaseAuth } from 'react-firebaseui';
 
 
-var Input = (props)=>{
-  if (props.inp){
-  return (<h1>
-    <strong>Method</strong><br/>
-    <input type="text" ref={input=>input&&input.focus()} name="" id="" onChange={props.rrender}/></h1>)
-  } return ""
-}
+// var Input = (props)=>{
+//   if (props.inp){
+//   return (<h1>
+//     <strong>Method</strong><br/>
+//     <input type="text" ref={input=>input&&input.focus()} name="" id="" onChange={props.rrender}/></h1>)
+//   } return ""
+// }
 class App extends Component {
   constructor(){
     super();
@@ -23,7 +23,7 @@ class App extends Component {
       input: false,
       isLoggedIn:false
     };
-    var self = this
+    // var self = this
     this.handleSetName = this.handleSetName.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
     // firebase.onAuthStateChanged(function(user){
@@ -61,7 +61,7 @@ class App extends Component {
 
   render() {
     console.log(firebaseAuth().currentUser)
-    let {counter, isLoggedIn} = this.state;
+    let {isLoggedIn} = this.state;
     return (
       <div className="App">
         <header className="App-header">
