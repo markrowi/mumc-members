@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  // text-align: center;
 }
 
 .App-logo {
@@ -12,6 +12,7 @@
   height: 150px;
   padding: 20px;
   color: white;
+  margin-bottom: 20px;
 }
 
 .App-title {
@@ -25,4 +26,16 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.list-of-members {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+.list-of-members .list-group-item:last-child{
+  border-bottom:0;
+}
+
+
+.list-of-members .list-group-item{
+  padding-bottom:0;
 }
