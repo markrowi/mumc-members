@@ -2,31 +2,28 @@ import * as firebase from 'firebase';
 // import * as firebaseui from 'firebaseui';
 
 let database;
-let family
 
-// export const init = ()=>{
-      // Initialize Firebase
-  var config = {
+var config = {
     apiKey: "AIzaSyDlCrMx1Z0vo2e8Cq4EhwJt7KmJGN7CZQk",
     authDomain: "members-34f65.firebaseapp.com",
     databaseURL: "https://members-34f65.firebaseio.com",
     projectId: "members-34f65",
     storageBucket: "members-34f65.appspot.com",
     messagingSenderId: "297737399796"
-  };
+};
 
-  firebase.initializeApp(config);
+firebase.initializeApp(config);
 
-  export const uiConfig = {
+export const uiConfig = {
     signInFlow: 'popup',
     signInSuccessUrl: 'http://localhost:3000/',
     signInOptions: [
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-      firebase.auth.PhoneAuthProvider.PROVIDER_ID
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        firebase.auth.PhoneAuthProvider.PROVIDER_ID
     ],
     tosUrl: '/'
-  };
+};
 //   var ui = new firebaseui.auth.AuthUI(firebase.auth());
   
 //   ui.start('#firebaseui-auth-container', uiConfig);
