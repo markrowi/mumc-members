@@ -72,7 +72,8 @@ class App extends Component {
           <h1 className="App-title">REACT</h1>
         </header>
         <div className="container">
-          {(()=>{
+        <MembersAppContainer/>
+          {/* {(()=>{
             if(user!==undefined){
               if(!isLoggedIn){
                 return <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth()} style={{"display": (!isLoggedIn?"block":"none")}}/>
@@ -86,7 +87,7 @@ class App extends Component {
                       <small>Logged in as <strong>{user.displayName}</strong></small>
                     </p>
                     <p className="text-center">
-                      <input onClick={this.handleSignOut} type="button" className="btn btn-primary" value="Logout"/> 
+                      <input onClick={this.handleSignOut} type="button" className="btn btn-secondary" value="Logout"/> 
                     </p>
                   </div>
                   
@@ -95,7 +96,7 @@ class App extends Component {
               }
             }
           })()
-          }
+          } */}
           
           
         </div>

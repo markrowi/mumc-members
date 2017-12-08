@@ -43,16 +43,17 @@ class MembersContainer extends Component {
     
     render(){
 
-        let {ministries} = this.state;
+        let {ministries, firstName} = this.state;
         return (
             <form className="member-component">
-      
-                
+                <div className="header">
+                    <h4 className="title">{firstName||"Member"}</h4>
+                </div>
                 <div class="row">
                     <div class="col-sm-12 col-md-4">
                         <div className="form-group">
                             <label htmlFor="firstName">Fist Name</label>
-                            <input type="text" className="form-control" placeholder="Fist Name" name="firstName" id=""/>
+                            <input type="text" className="form-control" onChange={this.handleInputChange} placeholder="Fist Name" name="firstName" id=""/>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-3">

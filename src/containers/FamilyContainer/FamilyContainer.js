@@ -77,7 +77,7 @@ class FamilyContainer extends Component {
                         <div className="col-sm-12 col-md-6">
                             <div className="form-group">
                                 {/* <input type="text" className="form-control"  placeholder="Wedding Anniversary" name="" id=""/> */}
-                                <DatePicker className="form-control" calendarClassName="form-control" name="" placeholderText="Wedding Anniversary" onChange={this.handleDatePickerChange} selected={this.state.weddingAnniversary}/>
+                                <DatePicker className="form-control" calendarClassName="roo" name="" placeholderText="Wedding Anniversary" onChange={this.handleDatePickerChange} selected={this.state.weddingAnniversary}/>
                             </div>
                         </div>
                     </div>
@@ -103,7 +103,14 @@ class FamilyContainer extends Component {
                     <ul className="list-group list-group-flush list-of-members">
                         { 
                             members.map(function(val) {
-                                return <li className="list-group-item"><MemberContainer familyName={familyName} /></li>
+                                return <li className="list-group-item">
+                                    <MemberContainer familyName={familyName} />
+                                    <div className="row justify-content-end">
+                                        <div className="col-md-2 col-sm-12 text-right">
+                                            <button className="btn btn-block btn-sm btn-secondary">X Remove</button>
+                                        </div>
+                                    </div>
+                                </li>
                             })
                         }
                     </ul>
