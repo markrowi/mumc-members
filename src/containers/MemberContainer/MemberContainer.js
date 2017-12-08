@@ -6,8 +6,9 @@ import moment from 'moment';
 class MembersContainer extends Component {
     constructor(){
         super();
+        let {value} =  this.props;
         this.state = {
-            birthday: "",
+            birthday: null,
             ministries:[
                 "BS",
                 "SS",
@@ -21,10 +22,17 @@ class MembersContainer extends Component {
                 "VT",
                 "MT",
                 "ETC",
-            ]
+            ],...value
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
+    }
+
+    componentDidMount(){
+        // let {value} =  this.props;
+        // let state = this.state;
+        // this.setState({state, ...value});
+        console.log('state',this.state, this.props.value)
     }
 
     handleDatePickerChange(date){
@@ -43,32 +51,33 @@ class MembersContainer extends Component {
     
     render(){
 
-        let {ministries, firstName} = this.state;
+        let {ministries, firstName, lastName} = this.state;
+
         return (
             <form className="member-component">
                 <div className="header">
                     <h4 className="title">{firstName||"Member"}</h4>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-4">
+                <div className="row">
+                    <div className="col-sm-12 col-md-4">
                         <div className="form-group">
                             <label htmlFor="firstName">Fist Name</label>
                             <input type="text" className="form-control" onChange={this.handleInputChange} placeholder="Fist Name" name="firstName" id=""/>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-3">
+                    <div className="col-sm-12 col-md-3">
                         <div className="form-group">
-                            <label htmlFor="firstName">Middle Name</label>
+                            <label htmlFor="middleName">Middle Name</label>
                             <input type="text" className="form-control" placeholder="Middle Name" name="middleName" id=""/>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-4">
+                    <div className="col-sm-12 col-md-4">
                         <div className="form-group">
-                            <label htmlFor="firstName">Last Name</label>
-                            <input type="text" className="form-control" defaultValue={this.props.familyName} placeholder="Last Name" name="lastName" id=""/>
+                            <label htmlFor="lastName">Last Name</label>
+                            <input type="text" className="form-control" defaultValue={lastName} placeholder="Last Name" name="lastName" id=""/>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-1">
+                    <div className="col-sm-12 col-md-1">
                         <div className="form-group">
                             <label htmlFor="">Gender</label>
                             <select className="form-control" name="" id="">
@@ -76,24 +85,12 @@ class MembersContainer extends Component {
                                 <option value="Father">M</option>
                                 <option value="Mother">F</option>
                             </select>
-                            {/* <div className="form-group">
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" id="inlineCheckbox1" value="option1"/> M
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" id="inlineCheckbox2" value="option2"/> F
-                                    </label>
-                                </div>
-                            </div> */}
-                            
+                                                      
                         </div>
                     </div>
                 </div>
                 <div className="row">
-                    <div class="col-sm-12 col-md-2">
+                    <div className="col-sm-12 col-md-2">
                         <div className="form-group">
                             <label htmlFor="firstName">Relationship</label>
                             <select className="form-control" name="" id="">
@@ -105,13 +102,13 @@ class MembersContainer extends Component {
                         </div>
                     </div>
                     
-                    <div class="col col-sm-12 col-md-2">
+                    <div className="col col-sm-12 col-md-2">
                         <div className="form-group">
                             <label htmlFor="firstName">Date of Birth</label>
                             <DatePicker className="form-control" onChange={this.handleDatePickerChange} selected={this.state.birthday}/>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-3">
+                    <div className="col-sm-12 col-md-3">
                         <div className="form-group">
                             <label htmlFor="firstName">Membership Status</label>
                             <select className="form-control" name="" id="">
@@ -124,13 +121,13 @@ class MembersContainer extends Component {
                             </select>
                         </div>
                     </div>
-                    <div class="col col-sm-12 col-md-2">
+                    <div className="col col-sm-12 col-md-2">
                         <div className="form-group">
                             <label htmlFor="firstName">Membership Date</label>
                             <DatePicker className="form-control" onChange={this.handleDatePickerChange} selected={this.state.birthday}/>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-3">
+                    <div className="col-sm-12 col-md-3">
                         <div className="form-group">
                             <label htmlFor="firstName">How</label>
                             <select className="form-control" name="" id="">
@@ -144,16 +141,17 @@ class MembersContainer extends Component {
                 </div>
                 <div className="row">
                     
-                    <div class="col-sm-12 col-md-12">
+                    <div className="col-sm-12 col-md-12">
                         <div className="form-group">
                             <label htmlFor="firstName">Ministry Involvement</label>
                             <div className="form-group">
                                 {
-                                    ministries.map(function(m){
+                                    ministries.map(function(m, i){
+                                       
                                         return (
-                                            <div class="form-check form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" name="" type="checkbox" id="inlineCheckbox1" value={m}/> {m}
+                                            <div key={i} className="form-check form-check-inline">
+                                                <label className="form-check-label">
+                                                    <input className="form-check-input" name="" type="checkbox" id="inlineCheckbox1" value={m}/> {m}
                                                 </label>
                                             </div>
                                         )
@@ -169,7 +167,7 @@ class MembersContainer extends Component {
                 </div>
                 <div className="row">
                     
-                    <div class="col-sm-12 col-md-12">
+                    <div className="col-sm-12 col-md-12">
                         <div className="form-group">
                             <label htmlFor="firstName">Changes / Remarks</label>
                             <input type="text" className="form-control" name="remarks" id=""/>

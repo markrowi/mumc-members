@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MemberContainer from '../../containers/MemberContainer/MemberContainer'
+import MemberContainer from 'Containers/MemberContainer/MemberContainer'
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -11,7 +11,7 @@ class FamilyContainer extends Component {
         super();
         this.state = {
             familyName:"",
-            weddingAnniversary:"",
+            weddingAnniversary:null,
             members:[
                 // {},
                 // {},
@@ -29,9 +29,19 @@ class FamilyContainer extends Component {
     }
 
     handleAddMember(){
-        let {members} = this.state;
+        let {members, familyName} = this.state;
+        const member = {
+            firstName:"",
+            middleName:"",
+            lastName:familyName,
+            gender:"",
+            birthday:"",
+            familyRelationship:"",
+            membershipStatus:""
+
+        }
         this.setState({
-            members:[...members , {}]
+            members:[...members , member]
         })
     }
 
@@ -44,6 +54,8 @@ class FamilyContainer extends Component {
             [name]: value
           });
     }
+
+    // handle
     
     render(){
         let familyStyle = {
@@ -53,8 +65,8 @@ class FamilyContainer extends Component {
         let members = this.state.members || []; 
         return (
             <div className="card family-component">
-                <div class="card-body">
-                    <h4 class="card-title">{familyName} Family</h4>
+                <div className="card-body">
+                    <h4 className="card-title">{familyName} Family</h4>
                     
                     <div className="row">
                         <div className="col-sm-12 col-md-6">
@@ -102,9 +114,10 @@ class FamilyContainer extends Component {
 
                     <ul className="list-group list-group-flush list-of-members">
                         { 
-                            members.map(function(val) {
-                                return <li className="list-group-item">
-                                    <MemberContainer familyName={familyName} />
+                            members.map(function(val,i) {
+                                console.log(val,i)
+                                return <li className="list-group-item" key={i}>
+                                    <MemberContainer value={val}/>
                                     <div className="row justify-content-end">
                                         <div className="col-md-2 col-sm-12 text-right">
                                             <button className="btn btn-block btn-sm btn-secondary">X Remove</button>

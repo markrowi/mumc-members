@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 // import 'firebaseui/dist/firebaseui.css'
 import 'bootstrap/dist/css/bootstrap.css';
-import MembersAppContainer from './containers/MembersAppContainer/MembersAppContainer'
+import MembersAppContainer from 'Containers/MembersAppContainer/MembersAppContainer'
 import { FirebaseAuth } from 'react-firebaseui';
 
 
