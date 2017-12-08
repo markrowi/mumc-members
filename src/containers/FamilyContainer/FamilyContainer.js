@@ -35,7 +35,7 @@ class FamilyContainer extends Component {
             middleName:"",
             lastName:familyName,
             gender:"",
-            birthday:"",
+            birthday:null,
             familyRelationship:"",
             membershipStatus:""
 
@@ -43,6 +43,12 @@ class FamilyContainer extends Component {
         this.setState({
             members:[...members , member]
         })
+    }
+
+    handleMemberChange(index, val){
+        console.log(index, val);
+        const newMem = this.state.members.map((mem, i) => i === index  ? val : mem);
+        this.setState({members:newMem});
     }
 
     handleInputChange(event){
@@ -61,13 +67,15 @@ class FamilyContainer extends Component {
         let familyStyle = {
 
         }
+        let self = this;
         let {familyName} = this.state;
         let members = this.state.members || []; 
+ 
         return (
             <div className="card family-component">
                 <div className="card-body">
                     <h4 className="card-title">{familyName} Family</h4>
-                    
+                    <p>{JSON.stringify(members)}</p>
                     <div className="row">
                         <div className="col-sm-12 col-md-6">
                             <div className="form-group">
@@ -117,7 +125,7 @@ class FamilyContainer extends Component {
                             members.map(function(val,i) {
                                 console.log(val,i)
                                 return <li className="list-group-item" key={i}>
-                                    <MemberContainer value={val}/>
+                                    <MemberContainer onChange={self.handleMemberChange.bind(self,i)} value={val}/>
                                     <div className="row justify-content-end">
                                         <div className="col-md-2 col-sm-12 text-right">
                                             <button className="btn btn-block btn-sm btn-secondary">X Remove</button>

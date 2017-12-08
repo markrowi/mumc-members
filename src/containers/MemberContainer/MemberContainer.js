@@ -4,35 +4,16 @@ import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 
 class MembersContainer extends Component {
-    constructor(){
-        super();
-        let {value} =  this.props;
+    constructor(props){
+        super(props);
+       
         this.state = {
-            birthday: null,
-            ministries:[
-                "BS",
-                "SS",
-                "CG",
-                "DG",
-                "WS",
-                "CHOIR",
-                "O",
-                "PT",
-                "PT*",
-                "VT",
-                "MT",
-                "ETC",
-            ],...value
+            
+            ...props.value
         }
+
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
-    }
-
-    componentDidMount(){
-        // let {value} =  this.props;
-        // let state = this.state;
-        // this.setState({state, ...value});
-        console.log('state',this.state, this.props.value)
     }
 
     handleDatePickerChange(date){
@@ -43,16 +24,32 @@ class MembersContainer extends Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        
+        let self = this;
         this.setState({
             [name]: value
-          });
+          }, ()=> {
+              self.props.onChange(self.state);
+        });
+       
     }
-    
+
     render(){
 
-        let {ministries, firstName, lastName} = this.state;
-
+        let {firstName, lastName} = this.state;
+        const ministries = [
+            "BS",
+            "SS",
+            "CG",
+            "DG",
+            "WS",
+            "CHOIR",
+            "O",
+            "PT",
+            "PT*",
+            "VT",
+            "MT",
+            "ETC",
+        ]
         return (
             <form className="member-component">
                 <div className="header">
@@ -80,8 +77,8 @@ class MembersContainer extends Component {
                     <div className="col-sm-12 col-md-1">
                         <div className="form-group">
                             <label htmlFor="">Gender</label>
-                            <select className="form-control" name="" id="">
-                                <option selected value="" className="text-muted"  disabled></option>
+                            <select defaultValue="" className="form-control" name="" id="">
+                                <option value="" className="text-muted"  disabled></option>
                                 <option value="Father">M</option>
                                 <option value="Mother">F</option>
                             </select>
@@ -93,8 +90,8 @@ class MembersContainer extends Component {
                     <div className="col-sm-12 col-md-2">
                         <div className="form-group">
                             <label htmlFor="firstName">Relationship</label>
-                            <select className="form-control" name="" id="">
-                                <option selected value="" className="text-muted"  disabled>Select...</option>
+                            <select defaultValue="" className="form-control" name="" id="">
+                                <option value="" className="text-muted"  disabled>Select...</option>
                                 <option value="Father">Father</option>
                                 <option value="Mother">Mother</option>
                                 <option value="Children">Children</option>
@@ -111,8 +108,8 @@ class MembersContainer extends Component {
                     <div className="col-sm-12 col-md-3">
                         <div className="form-group">
                             <label htmlFor="firstName">Membership Status</label>
-                            <select className="form-control" name="" id="">
-                                <option selected value="" className="text-muted" disabled>Select...</option>
+                            <select defaultValue="" className="form-control" name="" id="">
+                                <option value="" className="text-muted" disabled>Select...</option>
                                 <option value="P">Professing</option>
                                 <option value="B">Baptized</option>
                                 <option value="AFM">Affilliate Member</option>
@@ -130,8 +127,8 @@ class MembersContainer extends Component {
                     <div className="col-sm-12 col-md-3">
                         <div className="form-group">
                             <label htmlFor="firstName">How</label>
-                            <select className="form-control" name="" id="">
-                                <option selected value="" className="text-muted" disabled>Select...</option>
+                            <select defaultValue="" className="form-control" name="" id="">
+                                <option value="" className="text-muted" disabled>Select...</option>
                                 <option value="P">Disfellow</option>
                                 <option value="B">Transferred</option>
                         

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {setName, signOut, firebaseAuth, uiConfig} from './javascripts/firebase'
-import logo from './logo.svg';
+
 import './App.css';
 // import 'firebaseui/dist/firebaseui.css'
 import 'bootstrap/dist/css/bootstrap.css';
