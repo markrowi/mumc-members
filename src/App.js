@@ -80,13 +80,16 @@ class App extends Component {
                 return (<div>
   
                   <MembersAppContainer/>
+                  <br/>
+                  <div className="alert alert-light text-center">
+                    <p>
+                      <small>Logged in as <strong>{user.displayName}</strong></small>
+                    </p>
+                    <p className="text-center">
+                      <input onClick={this.handleSignOut} type="button" className="btn btn-primary" value="Logout"/> 
+                    </p>
+                  </div>
                   
-                  <p className="alert alert-light text-center">
-                    <small>Logged in as <strong>{user.displayName}</strong></small>
-                  </p>
-                  <p className="text-center">
-                    <input onClick={this.handleSignOut} type="button" className="btn btn-primary" value="Logout"/> 
-                  </p>
                   
                 </div> )
               }

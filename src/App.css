@@ -1,6 +1,13 @@
 .App {
-  // text-align: center;
+  /* text-align: center; */
+  background-color: #f5f5f5;
 }
+
+html{
+
+  background-color: #f5f5f5;
+}
+
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -38,4 +45,8 @@
 
 .list-of-members .list-group-item{
   padding-bottom:0;
+}
+
+.react-datepicker__input-container, .react-datepicker-wrapper{
+  width: 100%;
 }
