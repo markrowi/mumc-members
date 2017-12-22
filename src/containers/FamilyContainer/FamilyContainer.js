@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom'; 
 import MemberContainer from 'Containers/MemberContainer/MemberContainer'
 
 import DatePicker from 'react-datepicker';
@@ -30,6 +31,7 @@ class FamilyContainer extends Component {
 
     handleAddMember(){
         let {members, familyName} = this.state;
+        let self = this;
         const member = {
             firstName:"",
             middleName:"",
@@ -42,7 +44,16 @@ class FamilyContainer extends Component {
         }
         this.setState({
             members:[...members , member]
-        })
+        }, ()=>{
+            
+            // if(self.lastMember){
+                ReactDOM.findDOMNode(self.refs.addBtn).focus();
+                // this.lastMember.focus();
+                console.log("lastMember",self.refs.addBtn)
+            // }
+        }); 
+        
+        
     }
 
     handleMemberChange(index, val){
@@ -125,7 +136,7 @@ class FamilyContainer extends Component {
                             members.map(function(val,i) {
                                 console.log(val,i)
                                 return <li className="list-group-item" key={i}>
-                                    <MemberContainer onChange={self.handleMemberChange.bind(self,i)} value={val}/>
+                                    <MemberContainer ref={(mem)=>{self.lastMember = mem; console.log("mem",mem)}} onChange={self.handleMemberChange.bind(self,i)} value={val}/>
                                     <div className="row justify-content-end">
                                         <div className="col-md-2 col-sm-12 text-right">
                                             <button className="btn btn-block btn-sm btn-secondary">X Remove</button>
@@ -136,7 +147,7 @@ class FamilyContainer extends Component {
                         }
                     </ul>
                     
-                    <a href="#" className="btn" onClick={this.handleAddMember}>+ Add Member</a>
+                    <a href="#added" id="added" className="btn btn-link" ref="addBtn" onClick={this.handleAddMember}>+ Add Member</a>
                    
 
             </div>

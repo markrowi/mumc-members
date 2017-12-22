@@ -20,6 +20,7 @@ class MembersContainer extends Component {
         this.setState({birthday:date})
 
     }
+   
     handleInputChange(event){
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
